@@ -11,14 +11,15 @@ namespace MacroConsole
         public MacroList(string path)
         {
             this.path = path;
-            this.updateMacros();
+            macroList = new List<Macro>();
+            this.ReadMacros();
         }
 
-        public void updateMacros()
+        public void ReadMacros()
         {
-            macroList = new List<Macro>();
             //path = "MacroList.txt";           
             // This text is added only once to the file.
+            macroList = new List<Macro>();
             if (File.Exists(path))
             {
                 string line;
@@ -30,7 +31,24 @@ namespace MacroConsole
                 }
                 file.Close();
             }
-        }        
+        }
+
+        public void WriteMacros()
+        {            
+            // This text is added only once to the file.
+            if (!File.Exists(path))
+            {
+                // Create a file to write to.
+                using (StreamWriter macroFile = File.CreateText(path))
+                {
+                    foreach (var item in macroList)
+                    {
+                        macroFile.WriteLine(item.keyPress + "~" + item.typeOfMacro + "~" + item.pathOrURL + "~" + item.description);
+                    }
+                    
+                }
+            }
+        }
         public List<Macro> macroList { get; set; }
         public string path { get; set; }
 
