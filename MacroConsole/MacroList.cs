@@ -12,10 +12,11 @@ namespace MacroConsole
         {
             this.path = path;
             macroList = new List<Macro>();
-            this.ReadMacros();
+            this.LoadMacros();
         }
 
-        public void ReadMacros()
+        //fills list of macros from file
+        public void LoadMacros()
         {
             //path = "MacroList.txt";           
             // This text is added only once to the file.
@@ -23,30 +24,32 @@ namespace MacroConsole
             if (File.Exists(path))
             {
                 string line;
-                System.IO.StreamReader file = new System.IO.StreamReader(path);
-                while ((line = file.ReadLine()) != null)
-                {
-                    string[] lines = line.Split(",");
-                    macroList.Add(new Macro(lines[0], Convert.ToInt16(lines[1]), lines[2], lines[3]));
-                }
-                file.Close();
-            }
-        }
+                                   
+                        
+                    string[] Alllines = File.ReadAllLines(path);
+                    foreach (string linelocal in Alllines)
+                    {
+                        string[] linesSplit = linelocal.Split(",");
+                        macroList.Add(new Macro(linesSplit[0], Convert.ToInt16(linesSplit[1]), linesSplit[2], linesSplit[3]));
+                    }
 
+                 
+                
+            }
+        }        
+
+        //writes all macros to file
         public void WriteMacros()
         {            
             // This text is added only once to the file.
-            if (!File.Exists(path))
+            if (File.Exists(path))
             {
-                // Create a file to write to.
-                using (StreamWriter macroFile = File.CreateText(path))
+                
+                File.AppendAllText(path, "");
+                foreach (var item in macroList)
                 {
-                    foreach (var item in macroList)
-                    {
-                        macroFile.WriteLine(item.keyPress + "~" + item.typeOfMacro + "~" + item.pathOrURL + "~" + item.description);
-                    }
-                    
-                }
+                    File.AppendAllText(path, item.keyPress + "," + item.typeOfMacro + "," + item.pathOrURL + "," + item.description + Environment.NewLine);
+                } 
             }
         }
         public List<Macro> macroList { get; set; }

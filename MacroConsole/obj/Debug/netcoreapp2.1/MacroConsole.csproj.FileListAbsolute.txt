@@ -20,5 +20,3 @@ C:\Users\debaedts sebastiaan\Desktop\MacroConsole\MacroConsole\bin\Debug\netcore
 C:\Users\debaedts sebastiaan\Desktop\MacroConsole\MacroConsole\bin\Debug\netcoreapp2.1\MacroConsole.runtimeconfig.dev.json
 C:\Users\debaedts sebastiaan\Desktop\MacroConsole\MacroConsole\bin\Debug\netcoreapp2.1\MacroConsole.dll
 C:\Users\debaedts sebastiaan\Desktop\MacroConsole\MacroConsole\bin\Debug\netcoreapp2.1\MacroConsole.pdb
-C:\Users\debaedts sebastiaan\Desktop\MacroConsole\MacroConsole\bin\Debug\netcoreapp2.1\config.txt
-C:\Users\debaedts sebastiaan\Desktop\MacroConsole\MacroConsole\bin\Debug\netcoreapp2.1\MacroList.txt

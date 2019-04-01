@@ -18,7 +18,7 @@ namespace MacroConsole
             Console.WriteLine("MacroConsole");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Current Macros:");
-            MacroList list = new MacroList(@".\MacroList.txt");
+            MacroList list = new MacroList(@"C:\Temp\MacroList.txt");
             if (list.macroList.Count != 0)
             {
                 foreach (Macro macro in list.macroList)
@@ -37,17 +37,30 @@ namespace MacroConsole
             {
                 case 'A':
                     Console.WriteLine("which key will execute the macro?");
-                    string key = Console.ReadKey().ToString();
+                    var key = Console.ReadLine();
+
                     Console.WriteLine("WHich type of macro? 1 for google, 2 for executing powershellscripts, 3 for executing powershell scripts, 4 for booting a program.");
                     int type = Convert.ToInt16(Console.ReadLine());
+
                     Console.WriteLine("Path to the URL/program/script?");
                     string path = Console.ReadLine();
+
                     Console.WriteLine("Description?");
                     string description = Console.ReadLine();
+
                     Macro m = new Macro(key,type, path, description);
                     list.macroList.Add(m);
                     list.WriteMacros();
-                    list.ReadMacros();
+                    list.LoadMacros();
+                    Console.WriteLine("macros updated.");
+                    if (list.macroList.Count != 0)
+                    {
+                        foreach (Macro macro in list.macroList)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.WriteLine(macro.keyPress + "\t" + macro.description);
+                        }
+                    }
                     break;
                 case 'E':
                     Console.WriteLine("for which key would you like to edit the macro?");
@@ -66,8 +79,16 @@ namespace MacroConsole
                             list.macroList.ElementAt(i).typeOfMacro = typeEdit;
                             list.macroList.ElementAt(i).pathOrURL = pathEdit;
                             list.macroList.ElementAt(i).description = descriptionEdit;
-                            list.ReadMacros();
+                            list.LoadMacros();
                             break;
+                        }
+                    }
+                    if (list.macroList.Count != 0)
+                    {
+                        foreach (Macro macro in list.macroList)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.WriteLine(macro.keyPress + "\t" + macro.description);
                         }
                     }
                     break;
@@ -79,8 +100,16 @@ namespace MacroConsole
                         if (list.macroList.ElementAt(i).keyPress == keyToRemove)
                         {
                             list.macroList.RemoveAt(i);
-                            list.ReadMacros();
+                            list.LoadMacros();
                             break;
+                        }
+                    }
+                    if (list.macroList.Count != 0)
+                    {
+                        foreach (Macro macro in list.macroList)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.WriteLine(macro.keyPress + "\t" + macro.description);
                         }
                     }
                     break;                
